@@ -1,168 +1,260 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GK 😌</title>
+<title>For GK ❤️</title>
 
 <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
+
 body{
-margin:0;
-font-family:'Poppins',sans-serif;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-flex-direction:column;
-color:white;
-overflow:hidden;
-animation:bgMove 8s infinite alternate;
-background:linear-gradient(135deg,#141E30,#243B55);
+  background:#0f172a;
+  color:#f8fafc;
+  overflow-x:hidden;
+  transition:0.5s;
 }
 
-/* Animated Background */
-@keyframes bgMove{
-0%{background:linear-gradient(135deg,#141E30,#243B55);}
-100%{background:linear-gradient(135deg,#ff6a88,#2c3e50);}
+body.light{
+  background:#ffe4e6;
+  color:#111;
 }
 
-/* Neon GK */
-.neon{
-font-size:60px;
-text-shadow:0 0 10px #fff,
-0 0 20px #ff4d6d,
-0 0 40px #ff4d6d;
-margin-bottom:20px;
+/* Toggle */
+.toggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#ec4899;
+  color:white;
+  padding:10px 18px;
+  border-radius:20px;
+  cursor:pointer;
+  z-index:1000;
+  font-size:14px;
 }
 
-/* Heart */
+/* Floating Hearts */
 .heart{
-font-size:100px;
-animation:beat 1s infinite;
-}
-
-@keyframes beat{
-0%{transform:scale(1);}
-25%{transform:scale(1.35);}
-40%{transform:scale(1);}
-60%{transform:scale(1.35);}
-100%{transform:scale(1);}
-}
-
-/* Buttons */
-button{
-margin:15px;
-padding:12px 30px;
-border:none;
-border-radius:30px;
-font-weight:bold;
-cursor:pointer;
-background:white;
-color:black;
-transition:0.3s;
-font-size:16px;
-}
-
-button:hover{
-transform:scale(1.1);
-}
-
-#message{
-margin-top:25px;
-font-size:18px;
-min-height:80px;
-text-align:center;
-max-width:500px;
-}
-
-/* Floating hearts */
-.floating{
-position:absolute;
-animation:float 6s linear infinite;
-color:#ff4d6d;
+  position:fixed;
+  bottom:-20px;
+  color:#ec4899;
+  font-size:20px;
+  animation:float 6s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-10vh);}
+  0%{ transform:translateY(0) scale(1); opacity:1; }
+  100%{ transform:translateY(-110vh) scale(1.5); opacity:0; }
+}
+
+/* Hero */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:3.2rem;
+  margin-bottom:15px;
+}
+
+.typing{
+  font-size:1.2rem;
+  max-width:650px;
+  border-right:2px solid #ec4899;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+.beating-heart{
+  margin-top:20px;
+  font-size:60px;
+  color:#ec4899;
+  animation:heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat{
+  0%{ transform:scale(1); }
+  25%{ transform:scale(1.2); }
+  40%{ transform:scale(1); }
+  60%{ transform:scale(1.25); }
+  100%{ transform:scale(1); }
+}
+
+
+/* Menu */
+.menu{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:50px;
+}
+
+.menu button{
+  padding:12px 22px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  background:#ec4899;
+  color:white;
+  font-size:16px;
+  transition:0.3s;
+}
+
+.menu button:hover{
+  transform:scale(1.1);
+}
+
+/* Notes */
+.note{
+  display:none;
+  background:rgba(255,255,255,0.1);
+  padding:30px;
+  margin:30px auto;
+  width:85%;
+  max-width:700px;
+  border-radius:20px;
+  animation:popup 1s ease;
+}
+
+body.light .note{
+  background:white;
+}
+
+@keyframes popup{
+  from{ opacity:0; transform:translateY(50px) scale(0.9); }
+  to{ opacity:1; transform:translateY(0) scale(1); }
+}
+
+.note h2{
+  color:#ec4899;
+  margin-bottom:15px;
+}
+
+.note p{
+  font-size:1.1rem;
+  line-height:1.6;
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:30px;
+  opacity:0.7;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
-<source src="song.mp3" type="audio/mpeg">
-</audio>
+<div class="toggle" onclick="toggleMode()">🌙 Dark / ☀ Light</div>
 
-<audio id="heartbeatSound">
-<source src="heartbeat.mp3" type="audio/mpeg">
-</audio>
+<section class="hero">
+  <h1>from my bottom of heart to GK ❤️</h1>
+  
+  <!-- Beating Heart -->
+  <div class="beating-heart">❤️</div>
 
-<div class="neon">GK ✨</div>
-<div class="heart">❤️</div>
+  <div class="typing" id="typing"></div>
+</section>
 
-<h2>Did I impress you? 😏</h2>
-
-<div>
-<button onclick="yes()">YES 😌</button>
-<button id="noBtn" onclick="moveNo()">NO 🙃</button>
+<div class="menu">
+  <button onclick="openNote('respect')">🌸 About you</br> click here </button>
+  <button onclick="openNote('fun')">😄 Fun</br> click here</button>
+  <button onclick="openNote('emotion')">🥹 Emotion</br> click here</button>
+  <button onclick="openNote('promise')">💞 Promise</br> click here</button>
 </div>
 
-<div id="message"></div>
+<div id="respect" class="note">
+  <h2>🌸 Respect & Admiration</h2>
+  <p>
+    You are truly a very gentle and respectful person.
+    I admire this quality of yours the most.
+    The way you treat people with kindness and dignity
+    makes you genuinely special.
+  </p>
+</div>
+
+<div id="fun" class="note">
+  <h2>😄 Fun Side</h2>
+  <p>
+    At first, you look very strict and honestly,
+    I was a little scared of you 😄
+    But once I got to know you,
+    I realized you are genuinely a very nice guy.
+  </p>
+</div>
+
+<div id="emotion" class="note">
+  <h2>🥹 From the Heart</h2>
+  <p>
+    I want you to know that I am always available for you,
+    in your good times as well as in your bad times.
+    No matter what happens,
+    you will never face anything alone.
+  </p>
+</div>
+
+<div id="promise" class="note">
+  <h2>💞 A Small Promise</h2>
+  <p>
+    Some people enter our lives quietly
+    and stay forever.
+    You are one of those people.
+  </p>
+</div>
+
+<footer>
+  Made with ❤️ only for GK
+</footer>
 
 <script>
+/* Typing Effect */
+const text = "Some things can’t be said, so I expressed them this way.";
+let i = 0;
+function type(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type, 60);
+  }
+}
+type();
 
-let noCount = 0;
-const music = document.getElementById("bgMusic");
-const beatSound = document.getElementById("heartbeatSound");
-
-/* Start music automatically on first click anywhere */
-document.addEventListener("click", function(){
-music.play();
-beatSound.play();
-}, { once:true });
-
-function yes(){
-document.getElementById("message").innerHTML=
-"One honest truth? ✨ You don't get impressed easily… so if you said YES, that actually means I did something right 😌💖";
-createHearts();
+/* Toggle Dark Mode */
+function toggleMode(){
+  document.body.classList.toggle("light");
 }
 
-function moveNo(){
-let btn=document.getElementById("noBtn");
-noCount++;
-
-if(noCount==1){
-btn.innerHTML="Really? 😏";
-}
-else if(noCount==2){
-btn.innerHTML="Think Again 😌";
-}
-else if(noCount>=3){
-btn.innerHTML="Okay Fine YES 😂";
-yes();
-return;
+/* Open Notes */
+function openNote(id){
+  document.querySelectorAll('.note').forEach(n => n.style.display = "none");
+  const note = document.getElementById(id);
+  note.style.display = "block";
+  note.scrollIntoView({behavior:"smooth"});
 }
 
-btn.style.position="absolute";
-btn.style.top=Math.random()*80+"vh";
-btn.style.left=Math.random()*80+"vw";
-}
-
-/* Floating hearts */
-function createHearts(){
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.className="floating";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=Math.random()*20+15+"px";
-document.body.appendChild(heart);
-setTimeout(()=>{heart.remove();},6000);
-},400);
-}
-
+/* Floating Hearts */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 400);
 </script>
 
 </body>
