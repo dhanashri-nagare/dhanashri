@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GK 😌</title>
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+flex-direction:column;
+color:white;
+overflow:hidden;
+animation:bgMove 8s infinite alternate;
+background:linear-gradient(135deg,#141E30,#243B55);
+}
+
+/* Animated Background */
+@keyframes bgMove{
+0%{background:linear-gradient(135deg,#141E30,#243B55);}
+100%{background:linear-gradient(135deg,#ff6a88,#2c3e50);}
+}
+
+/* Neon GK */
+.neon{
+font-size:60px;
+text-shadow:0 0 10px #fff,
+0 0 20px #ff4d6d,
+0 0 40px #ff4d6d;
+margin-bottom:20px;
+}
+
+/* Heart */
+.heart{
+font-size:100px;
+animation:beat 1s infinite;
+}
+
+@keyframes beat{
+0%{transform:scale(1);}
+25%{transform:scale(1.35);}
+40%{transform:scale(1);}
+60%{transform:scale(1.35);}
+100%{transform:scale(1);}
+}
+
+/* Buttons */
+button{
+margin:15px;
+padding:12px 30px;
+border:none;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+background:white;
+color:black;
+transition:0.3s;
+font-size:16px;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#message{
+margin-top:25px;
+font-size:18px;
+min-height:80px;
+text-align:center;
+max-width:500px;
+}
+
+/* Floating hearts */
+.floating{
+position:absolute;
+animation:float 6s linear infinite;
+color:#ff4d6d;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="heartbeatSound">
+<source src="heartbeat.mp3" type="audio/mpeg">
+</audio>
+
+<div class="neon">GK ✨</div>
+<div class="heart">❤️</div>
+
+<h2>Did I impress you? 😏</h2>
+
+<div>
+<button onclick="yes()">YES 😌</button>
+<button id="noBtn" onclick="moveNo()">NO 🙃</button>
+</div>
+
+<div id="message"></div>
+
+<script>
+
+let noCount = 0;
+const music = document.getElementById("bgMusic");
+const beatSound = document.getElementById("heartbeatSound");
+
+/* Start music automatically on first click anywhere */
+document.addEventListener("click", function(){
+music.play();
+beatSound.play();
+}, { once:true });
+
+function yes(){
+document.getElementById("message").innerHTML=
+"One honest truth? ✨ You don't get impressed easily… so if you said YES, that actually means I did something right 😌💖";
+createHearts();
+}
+
+function moveNo(){
+let btn=document.getElementById("noBtn");
+noCount++;
+
+if(noCount==1){
+btn.innerHTML="Really? 😏";
+}
+else if(noCount==2){
+btn.innerHTML="Think Again 😌";
+}
+else if(noCount>=3){
+btn.innerHTML="Okay Fine YES 😂";
+yes();
+return;
+}
+
+btn.style.position="absolute";
+btn.style.top=Math.random()*80+"vh";
+btn.style.left=Math.random()*80+"vw";
+}
+
+/* Floating hearts */
+function createHearts(){
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="floating";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*20+15+"px";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},6000);
+},400);
+}
+
+</script>
+
+</body>
+</html>
